@@ -53,12 +53,16 @@ np4[0] = (50,0,0)
 np5[0] = (0,50,0)
 np6[0] = (0,0,50)
 
-np1.write()
+np1.clear()
 np2.clear()
 np3.clear()
 np4.clear()
 np5.clear()
 np6.clear()
+pin2 = machine.Pin(2, machine.Pin.OUT)
+pin2.on()
+time.sleep(5)
+pin2.off()
 
 server.add_route("/", index)
 server

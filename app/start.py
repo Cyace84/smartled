@@ -6,7 +6,7 @@ import sys
 import io
 import os
 import uasyncio
-import machine, NeoPixel
+import machine, neopixel
 import re
 
 from app import secrets
@@ -39,8 +39,19 @@ def index(request, data):
     server.send(response)
 
 
+np1 = neopixel.NeoPixel(machine.Pin(2), 50)
+np2 = neopixel.NeoPixel(machine.Pin(4), 50)
+np3 = neopixel.NeoPixel(machine.Pin(5), 50)
+np4 = neopixel.NeoPixel(machine.Pin(19), 50)
+np5 = neopixel.NeoPixel(machine.Pin(21), 50)
+np6 = neopixel.NeoPixel(machine.Pin(23), 50)
 
 
+def set_color(pin, color: tuple):
+    for i in range(pin.n):
+        pin[i] = color
+    pin.write()
+set_color(np2, (255, 0, 0))
 
 server.add_route("/", index)
 server

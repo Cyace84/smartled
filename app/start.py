@@ -93,14 +93,14 @@ PURPLE = (180, 0, 255)
 
 while True:
     pixels.fill(RED)
-    pixels.show()
+    pixels.write()
     # Increase or decrease to change the speed of the solid color change.
     time.sleep(1)
     pixels.fill(GREEN)
-    pixels.show()
+    pixels.write()
     time.sleep(1)
     pixels.fill(BLUE)
-    pixels.show()
+    pixels.write()
     time.sleep(1)
 
     color_chase(RED, 0.1)  # Increase the number to slow down the color chase

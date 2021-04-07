@@ -88,13 +88,6 @@ def set_color(pin, color: tuple):
 def demo(np):
     n = np.n
 
-    # cycle
-    for i in range(4 * n):
-        for j in range(n):
-            np[j] = (0, 0, 0)
-        np[i % n] = (255, 255, 255)
-        np.write()
-        time.sleep_ms(1)
 
     # bounce
     for i in range(4 * n):

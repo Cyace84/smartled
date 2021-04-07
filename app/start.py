@@ -37,9 +37,10 @@ def index(request, data):
     """ request handler """
     response = __import__("templates").index
     server.send(response)
+num_pixels=330
+pixel_pin = machine.Pin(4)
 
-
-pixels = neopixel.NeoPixel(machine.Pin(4), 330, timing=0)
+pixels = neopixel.NeoPixel(pixel_pin, num_pixels, timing=0)
 st134 = neopixel.NeoPixel(machine.Pin(5), 327)
 tg1 = neopixel.NeoPixel(machine.Pin(19), 149)
 tg2 = neopixel.NeoPixel(machine.Pin(21), 149)

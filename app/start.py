@@ -94,7 +94,7 @@ def demo(np):
             np[j] = (0, 0, 0)
         np[i % n] = (255, 255, 255)
         np.write()
-        time.sleep_ms(25)
+        time.sleep_ms(1)
 
     # bounce
     for i in range(4 * n):

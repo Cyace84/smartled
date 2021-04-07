@@ -72,7 +72,7 @@ def index(request, data):
     server.send(response)
 
 
-st123 = neopixel.NeoPixel(machine.Pin(4), 330)
+pixels = neopixel.NeoPixel(machine.Pin(4), 330, timing = 0)
 st134 = neopixel.NeoPixel(machine.Pin(5), 327)
 tg1 = neopixel.NeoPixel(machine.Pin(19), 149)
 tg2 = neopixel.NeoPixel(machine.Pin(21), 149)

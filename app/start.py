@@ -41,7 +41,7 @@ num_pixels=330
 pixel_pin = machine.Pin(4)
 
 st123 = neopixel.NeoPixel(pixel_pin, 330)
-st134 = neopixel.NeoPixel(machine.Pin(5), 327)
+st134 = neopixel.NeoPixel(machine.Pin(5), 330)
 tg1 = neopixel.NeoPixel(machine.Pin(19), 149)
 tg2 = neopixel.NeoPixel(machine.Pin(21), 149)
 tg3 = neopixel.NeoPixel(machine.Pin(22), 149)
@@ -59,10 +59,10 @@ while True:
     st134.fill((0,0,0))
     for i in range(st123.n):
 
-        st123[i] = (0, 20, 0)
+        st123[i] = (random.randint(0, 20),random.randint(0, 20),random.randint(0, 20))
         st123.write()
 
-        st134[i] = (random.randint(0, 60),random.randint(0, 60),random.randint(0, 60))
+        st134[i] = (random.randint(0, 20),random.randint(0, 20),random.randint(0, 20))
         st134.write()
 
 server.add_route("/", index)

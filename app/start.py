@@ -53,17 +53,15 @@ def set_color(pin, color: tuple):
         pin[i] = color
     pin.write()
 
-st123.fill((0,0,0))
-st134.fill((0,0,0))
-while True:
 
+while True:
+    st123.fill((0,0,0))
+    st134.fill((0,0,0))
     for i in range(st123.n):
-        st123[i] = (0,0,0)
+
+        st123[i] = (0, 20, 0)
         st123.write()
-        st123[i] = (random.randint(0, 60),random.randint(0, 60),random.randint(0, 60))
-        st123.write()
-        st134[i] = (0,0,0)
-        st134.write()
+
         st134[i] = (random.randint(0, 60),random.randint(0, 60),random.randint(0, 60))
         st134.write()
 

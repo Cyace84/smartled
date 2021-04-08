@@ -54,7 +54,7 @@ def set_color(pin, color: tuple):
     pin.write()
 
 
-while true:
+while True:
     for i in range(st123.n):
         st123[i] = (random.randint(0, 220),random.randint(0, 220),random.randint(0, 220))
         st123.write()

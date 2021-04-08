@@ -54,10 +54,12 @@ def set_color(pin, color: tuple):
     pin.write()
 
 
-white true:
+while true:
     for i in range(st123.n):
-        pixels[i] = (random.randint(0, 220),random.randint(0, 220),random.randint(0, 220))
-        np.write()
+        st123[i] = (random.randint(0, 220),random.randint(0, 220),random.randint(0, 220))
+        st123.write()
+        st134[i] = (random.randint(0, 220),random.randint(0, 220),random.randint(0, 220))
+        st134.write()
 
 server.add_route("/", index)
 server

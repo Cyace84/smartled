@@ -58,8 +58,12 @@ st134.fill((0,0,0))
 while True:
 
     for i in range(st123.n):
+        st123[i] = (0,0,0)
+        st123.write()
         st123[i] = (random.randint(0, 60),random.randint(0, 60),random.randint(0, 60))
         st123.write()
+        st134[i] = (0,0,0)
+        st134.write()
         st134[i] = (random.randint(0, 60),random.randint(0, 60),random.randint(0, 60))
         st134.write()
 

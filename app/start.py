@@ -40,7 +40,7 @@ def index(request, data):
 num_pixels=330
 pixel_pin = machine.Pin(4)
 
-st123 = neopixel.NeoPixel(pixel_pin, 330, timing=0)
+st123 = neopixel.NeoPixel(pixel_pin, 330)
 st134 = neopixel.NeoPixel(machine.Pin(5), 327)
 tg1 = neopixel.NeoPixel(machine.Pin(19), 149)
 tg2 = neopixel.NeoPixel(machine.Pin(21), 149)
@@ -53,12 +53,14 @@ def set_color(pin, color: tuple):
         pin[i] = color
     pin.write()
 
-
+st123.fill((0,0,0))
+st134.fill((0,0,0))
 while True:
+
     for i in range(st123.n):
-        st123[i] = (random.randint(0, 220),random.randint(0, 220),random.randint(0, 220))
+        st123[i] = (random.randint(0, 60),random.randint(0, 60),random.randint(0, 60))
         st123.write()
-        st134[i] = (random.randint(0, 220),random.randint(0, 220),random.randint(0, 220))
+        st134[i] = (random.randint(0, 60),random.randint(0, 60),random.randint(0, 60))
         st134.write()
 
 server.add_route("/", index)

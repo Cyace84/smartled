@@ -30,7 +30,7 @@ pin2 = machine.Pin(2, machine.Pin.OUT)
 
 
 
-from app.micropyserver import MicroPyServer
+from micropyserver import MicroPyServer
 
 server = MicroPyServer()
 """ add request handler """
@@ -94,7 +94,7 @@ strips = {
             "ledCorner1": tg3,
             "ledCorner1": tg4
         }
-print(111)
+
 def set_color(data):
     for led in data["strips"]:
         color = data["color"]
@@ -129,11 +129,12 @@ def set_color(data):
 def index(request, q):
     """ request handler """
     pin2.on()
-    time.sleep(5)
+    time.sleep(1)
     pin2.off()
-    pin2.on()
     time.sleep(1)
     pin2.on()
+    time.sleep(1)
+    pin2.off()
 
     #response = "{}".format(wlan.ifconfig()[0])
     data = parse_data(request.split("\r\n\r\n")[-1])
@@ -147,13 +148,14 @@ server.add_route("/", index)
 
 
 """ start server """
-
 pin2.on()
 time.sleep(1)
 pin2.off()
+time.sleep(1)
 pin2.on()
 time.sleep(1)
 pin2.off()
+time.sleep(1)
 pin2.on()
 time.sleep(1)
 pin2.off()

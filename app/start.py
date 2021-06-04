@@ -11,8 +11,8 @@ import re
 import random
 from app import secrets
 
-wlan_id = secrets.WIFI_SSID
-wlan_pass = secrets.WIFI_PASSWORD
+wlan_id = "TP-LINK_0876"#secrets.WIFI_SSID
+wlan_pass = "45275838"#secrets.WIFI_PASSWORD
 
 wlan = network.WLAN(network.STA_IF)
 wlan.active(True)
@@ -32,38 +32,83 @@ from app.micropyserver import MicroPyServer
 server = MicroPyServer()
 """ add request handler """
 
+def parse_data(data):
+    data = data.replace("%5B%5D", "[]").replace("+", "").replace("%2C", ",").replace("rgb", "").split("&")
+    new_data = {"strips": []}
+    for i in data:
+        print(data)
+        k = i.split("=")[0]
+        v = i.split("=")[1]
+        if k == "color":
+            new_data["color"] = eval(v)
 
-def index(request, data):
+        if k == "strips":
+            new_data["strips"].append(v)
+
+    return new_data
+
+
+def index(request, q):
     """ request handler """
-    response = __import__("templates").index
+    response = """
+Access-Control-Allow-Origin, *
+"""
+    data = parse_data(request.split("\r\n\r\n")[-1])
+    if data.get("color"):
+        set_color(data)
     server.send(response)
-num_pixels=330
-pixel_pin = machine.Pin(4)
 
-st123 = neopixel.NeoPixel(pixel_pin, 330)
-st134 = neopixel.NeoPixel(machine.Pin(5), 330)
+
+roof1 = neopixel.NeoPixel(machine.Pin(4), 330)
+roof2 = neopixel.NeoPixel(machine.Pin(5), 330)
 tg1 = neopixel.NeoPixel(machine.Pin(19), 149)
 tg2 = neopixel.NeoPixel(machine.Pin(21), 149)
 tg3 = neopixel.NeoPixel(machine.Pin(22), 149)
 tg4 = neopixel.NeoPixel(machine.Pin(23), 149)
 
 
-def set_color(pin, color: tuple):
-    for i in range(pin.n):
-        pin[i] = color
-    pin.write()
+def _set_color(pin_parent, pin, color: tuple):
+
+    for i in strips[pin]:
+        pin_parent[i] = color
+    pin_parent.write()
 
 
-while True:
-    st123.fill((0,0,0))
-    st134.fill((0,0,0))
-    for i in range(st123.n):
+strips = {
+            "roof1": roof1[:179],
+            "roof2": roof1[179:],
+            "roof3": roof2[:176],
+            "roof4": roof2[176:],
+            "corner1": tg1,
+            "corner2": tg2,
+            "corner3": tg3,
+            "corner4": tg4
+        }
 
-        st123[i] = (random.randint(0, 20),random.randint(0, 20),random.randint(0, 20))
-        st123.write()
+def set_color(data):
+    for led in data["strips"]:
+        color = data["color"]
+        if led == "cornerAll":
+            tg1.fill(color)
+            tg2.fill(color)
+            tg3.fill(color)
+            tg4.fill(color)
+        elif led == "roofAll":
+            roof1.fill(color)
+            roof2.fill(color)
+        else:
+            if led[:4] == "roof":
+                if led in ["roof1", "roof2"]:
+                    _set_color(roof1, led, color)
+                else:
+                    _set_color(roof2, led, color)
+            else:
+                strips[led].fill(color)
 
-        st134[i] = (random.randint(0, 20),random.randint(0, 20),random.randint(0, 20))
-        st134.write()
+
+
+
+
 
 server.add_route("/", index)
 server

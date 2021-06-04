@@ -31,6 +31,7 @@ import sys
 import io
 
 
+
 class MicroPyServer(object):
 
     def __init__(self, host="0.0.0.0", port=80):
@@ -69,7 +70,7 @@ class MicroPyServer(object):
             finally:
                 self._connect.close()
 
-    def add_route(self, path, handler, method="GET"):
+    def add_route(self, path, handler, method="POST"):
         """ Add new route  """
         self._routes.append(
             {"path": path, "handler": handler, "method": method})
@@ -99,14 +100,9 @@ class MicroPyServer(object):
 
     def get_request(self, buffer_length=4096):
         """ Return request body """
-        data = "111"
+
         request = str(self._connect.recv(buffer_length), "utf8")
-        if "POST" in request:
-            import time
-            time.sleep(2)
-            print(12312312312)
-            data = self._connect.recv(buffer_length)
-            print(222222222)
+        data = 111
 
         return request, data
 

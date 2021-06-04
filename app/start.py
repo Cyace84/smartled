@@ -30,13 +30,13 @@ pin2 = machine.Pin(2, machine.Pin.OUT)
 
 
 
-from app.micropyserver import MicroPyServer
+from micropyserver import MicroPyServer
 
 server = MicroPyServer()
 """ add request handler """
 
 def parse_data(data):
-    data = data.replace("%5B%5D", "[]").replace("+", "").replace("%2C", ",").replace("rgb", "").split("&")
+    data = data.replace("%5B%5D", "").replace("+", "").replace("%2C", ",").replace("rgb", "").split("&")
     new_data = {"strips": []}
     for i in data:
         print(data)
@@ -99,6 +99,7 @@ def set_color(data):
     for led in data["strips"]:
         color = data["color"]
         if led == "cornersAll":
+            print(led)
             tg1.fill(color)
             tg2.fill(color)
             tg3.fill(color)
@@ -133,7 +134,6 @@ def index(request, q):
     data = parse_data(request.split("\r\n\r\n")[-1])
     print(data)
     if data.get("color"):
-        print(1)
         set_color(data)
     server.send("wqeqweq")
 

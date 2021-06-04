@@ -84,8 +84,13 @@ tg3.fill((120, 0, 120))
 tg4.fill((50, 120, 0))
 
 
-roof1[10] = (255,0,0)
 roof1.write()
+roof2.write()
+tg1.write()
+tg2.write()
+tg3.write()
+tg4.write()
+
 def _set_color(pin_parent, pin, color: tuple):
 
     for i in strips[pin]:

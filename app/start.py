@@ -11,8 +11,8 @@ import re
 import random
 from app import secrets
 
-wlan_id = "TP-LINK_0876"#secrets.WIFI_SSID
-wlan_pass = "45275838"#secrets.WIFI_PASSWORD
+wlan_id = secrets.WIFI_SSID#"TP-LINK_0876"#
+wlan_pass = secrets.WIFI_PASSWORD#"45275838"#
 
 wlan = network.WLAN(network.STA_IF)
 wlan.active(True)
@@ -25,6 +25,7 @@ if wlan.isconnected() == False:
         if sleep > 10:
             wlan.connect("default", "12345678")
 print("Device IP:", wlan.ifconfig()[0])
+
 
 
 from app.micropyserver import MicroPyServer
@@ -50,9 +51,7 @@ def parse_data(data):
 
 def index(request, q):
     """ request handler """
-    response = """
-Access-Control-Allow-Origin, *
-"""
+    response = "{}".format(wlan.ifconfig()[0])
     data = parse_data(request.split("\r\n\r\n")[-1])
     if data.get("color"):
         set_color(data)

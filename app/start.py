@@ -125,6 +125,9 @@ def set_color(data):
 
 
 
+pin2.on()
+    time.sleep(1)
+pin2.off()
 
 def index(request, q):
     """ request handler """
@@ -138,6 +141,9 @@ def index(request, q):
         set_color(data)
     server.send(response)
 
+pin2.on()
+    time.sleep(1)
+pin2.off()
 server.add_route("/", index)
 
 

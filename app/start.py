@@ -98,7 +98,7 @@ strips = {
 def set_color(data):
     for led in data["strips"]:
         color = data["color"]
-        if led == "cornerAll":
+        if led == "cornersAll":
             tg1.fill(color)
             tg2.fill(color)
             tg3.fill(color)
@@ -128,17 +128,12 @@ def set_color(data):
 
 def index(request, q):
     """ request handler """
-    pin2.on()
-    time.sleep(1)
-    pin2.off()
-    time.sleep(1)
-    pin2.on()
-    time.sleep(1)
-    pin2.off()
 
     #response = "{}".format(wlan.ifconfig()[0])
     data = parse_data(request.split("\r\n\r\n")[-1])
+    print(data)
     if data.get("color"):
+        print(1)
         set_color(data)
     server.send("wqeqweq")
 
@@ -148,15 +143,5 @@ server.add_route("/", index)
 
 
 """ start server """
-pin2.on()
-time.sleep(1)
-pin2.off()
-time.sleep(1)
-pin2.on()
-time.sleep(1)
-pin2.off()
-time.sleep(1)
-pin2.on()
-time.sleep(1)
-pin2.off()
+
 server.start()

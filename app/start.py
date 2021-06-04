@@ -9,10 +9,10 @@ import uasyncio
 import machine, neopixel
 import re
 import random
-from app import secrets
+#from app import secrets
 
-wlan_id = secrets.WIFI_SSID#"TP-LINK_0876"#
-wlan_pass = secrets.WIFI_PASSWORD#"45275838"#
+wlan_id = "TP-LINK_3EA72E"#secrets.WIFI_SSID#"TP-LINK_0876"#
+wlan_pass = "20627653"#secrets.WIFI_PASSWORD#"45275838"#
 
 wlan = network.WLAN(network.STA_IF)
 wlan.active(True)
@@ -30,7 +30,7 @@ pin2 = machine.Pin(2, machine.Pin.OUT)
 
 
 
-from app.micropyserver import MicroPyServer
+from micropyserver import MicroPyServer
 
 server = MicroPyServer()
 """ add request handler """
@@ -49,7 +49,6 @@ def parse_data(data):
             new_data["strips"].append(v)
 
     return new_data
-
 
 def index(request, q):
     """ request handler """
@@ -71,17 +70,14 @@ tg2 = neopixel.NeoPixel(machine.Pin(21), 149)
 tg3 = neopixel.NeoPixel(machine.Pin(22), 149)
 tg4 = neopixel.NeoPixel(machine.Pin(23), 149)
 
-pin2.on()
-time.sleep(5)
-pin2.off()
 
 
-roof1.fill((120,0,0))
-roof2.fill((0, 120, 0))
-tg1.fill((0, 120, 120))
-tg2.fill((120, 120, 0))
-tg3.fill((120, 0, 120))
-tg4.fill((50, 120, 0))
+roof1.fill((0,0,0))
+roof2.fill((0,0,0))
+tg1.fill((0,0,0))
+tg2.fill((0,0,0))
+tg3.fill((0,0,0))
+tg4.fill((0,0,0))
 
 
 roof1.write()
@@ -99,16 +95,16 @@ def _set_color(pin_parent, pin, color: tuple):
 
 
 strips = {
-            "roof1": roof1[:179],
-            "roof2": roof1[179:],
-            "roof3": roof2[:176],
-            "roof4": roof2[176:],
+            "roof1": range(1, 179),
+            "roof2": range(180, 331),
+            "roof3": range(1, 179),
+            "roof4": range(180, 331),
             "corner1": tg1,
             "corner2": tg2,
             "corner3": tg3,
             "corner4": tg4
         }
-
+print(111)
 def set_color(data):
     for led in data["strips"]:
         color = data["color"]
@@ -117,10 +113,17 @@ def set_color(data):
             tg2.fill(color)
             tg3.fill(color)
             tg4.fill(color)
+            tg1.write()
+            tg2.write()
+            tg3.write()
+            tg4.write()
         elif led == "roofAll":
             roof1.fill(color)
             roof2.fill(color)
+            roof1.write()
+            roof2.write()
         else:
+
             if led[:4] == "roof":
                 if led in ["roof1", "roof2"]:
                     _set_color(roof1, led, color)
@@ -134,16 +137,12 @@ def set_color(data):
 
 
 
+
 server.add_route("/", index)
 
 
 
 """ start server """
-for i in range(3):
-    time.sleep(0.5)
 
-    pin2.on()
-    time.sleep(1)
-    pin2.off()
 
 server.start()

@@ -50,17 +50,7 @@ def parse_data(data):
 
     return new_data
 
-def index(request, q):
-    """ request handler """
-    pin2.on()
-    time.sleep(1)
-    pin2.off()
 
-    response = "{}".format(wlan.ifconfig()[0])
-    data = parse_data(request.split("\r\n\r\n")[-1])
-    if data.get("color"):
-        set_color(data)
-    server.send(response)
 
 
 roof1 = neopixel.NeoPixel(machine.Pin(4), 330)
@@ -136,7 +126,17 @@ def set_color(data):
 
 
 
+def index(request, q):
+    """ request handler """
+    pin2.on()
+    time.sleep(5)
+    pin2.off()
 
+    response = "{}".format(wlan.ifconfig()[0])
+    data = parse_data(request.split("\r\n\r\n")[-1])
+    if data.get("color"):
+        set_color(data)
+    server.send(response)
 
 server.add_route("/", index)
 
@@ -144,5 +144,13 @@ server.add_route("/", index)
 
 """ start server """
 
-
+pin2.on()
+    time.sleep(1)
+pin2.off()
+pin2.on()
+    time.sleep(1)
+pin2.off()
+pin2.on()
+    time.sleep(1)
+pin2.off()
 server.start()

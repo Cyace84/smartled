@@ -28,12 +28,12 @@ print("Device IP:", wlan.ifconfig()[0])
 
 for i in range(10):
     time.sleep(0.5)
-    pin2 = machine.Pin(2, machine.Pin.OUT)
+
     pin2.on()
-    time.sleep(0.5)
+    time.sleep(1)
     pin2.off()
 
-
+pin2 = machine.Pin(2, machine.Pin.OUT)
 from app.micropyserver import MicroPyServer
 
 server = MicroPyServer()
@@ -57,6 +57,10 @@ def parse_data(data):
 
 def index(request, q):
     """ request handler """
+    pin2.on()
+    time.sleep(1)
+    pin2.off()
+
     response = "{}".format(wlan.ifconfig()[0])
     data = parse_data(request.split("\r\n\r\n")[-1])
     if data.get("color"):
@@ -70,6 +74,11 @@ tg1 = neopixel.NeoPixel(machine.Pin(19), 149)
 tg2 = neopixel.NeoPixel(machine.Pin(21), 149)
 tg3 = neopixel.NeoPixel(machine.Pin(22), 149)
 tg4 = neopixel.NeoPixel(machine.Pin(23), 149)
+
+pin2.on()
+time.sleep(5)
+pin2.off()
+
 
 roof1.fill((120,0,0))
 roof2.fill((0, 120, 0))
@@ -122,7 +131,7 @@ def set_color(data):
 
 
 server.add_route("/", index)
-server
+
 
 
 """ start server """

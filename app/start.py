@@ -27,12 +27,7 @@ if wlan.isconnected() == False:
 print("Device IP:", wlan.ifconfig()[0])
 
 pin2 = machine.Pin(2, machine.Pin.OUT)
-for i in range(3):
-    time.sleep(0.5)
 
-    pin2.on()
-    time.sleep(1)
-    pin2.off()
 
 
 from app.micropyserver import MicroPyServer
@@ -88,6 +83,9 @@ tg2.fill((120, 120, 0))
 tg3.fill((120, 0, 120))
 tg4.fill((50, 120, 0))
 
+
+roof1[10] = (255,0,0)
+roof1.write()
 def _set_color(pin_parent, pin, color: tuple):
 
     for i in strips[pin]:
@@ -136,6 +134,11 @@ server.add_route("/", index)
 
 
 """ start server """
+for i in range(3):
+    time.sleep(0.5)
 
+    pin2.on()
+    time.sleep(1)
+    pin2.off()
 
 server.start()

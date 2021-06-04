@@ -65,6 +65,12 @@ tg2 = neopixel.NeoPixel(machine.Pin(21), 149)
 tg3 = neopixel.NeoPixel(machine.Pin(22), 149)
 tg4 = neopixel.NeoPixel(machine.Pin(23), 149)
 
+roof1.fill((120,0,0))
+roof2.fill((0, 120, 0))
+tg1.fill((0, 120, 120))
+tg2.fill((120, 120, 0))
+tg3.fill((120, 0, 120))
+tg4.fill((50, 120, 0))
 
 def _set_color(pin_parent, pin, color: tuple):
 

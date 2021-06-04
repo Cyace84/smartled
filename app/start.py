@@ -26,14 +26,15 @@ if wlan.isconnected() == False:
             wlan.connect("default", "12345678")
 print("Device IP:", wlan.ifconfig()[0])
 
-for i in range(10):
+pin2 = machine.Pin(2, machine.Pin.OUT)
+for i in range(3):
     time.sleep(0.5)
 
     pin2.on()
     time.sleep(1)
     pin2.off()
 
-pin2 = machine.Pin(2, machine.Pin.OUT)
+
 from app.micropyserver import MicroPyServer
 
 server = MicroPyServer()

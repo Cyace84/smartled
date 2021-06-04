@@ -30,7 +30,7 @@ pin2 = machine.Pin(2, machine.Pin.OUT)
 
 
 
-from micropyserver import MicroPyServer
+from app.micropyserver import MicroPyServer
 
 server = MicroPyServer()
 """ add request handler """

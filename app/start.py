@@ -93,7 +93,7 @@ def _set_color(pin_parent, pin, color: tuple):
 
 strips = {
             "ledRoof1": range(0, 179),
-            "ledRoof2": range(180, 330),
+            "ledRoof2": range(179, 330),
             "ledRoof3": range(0, 151),
             "ledRoof4": range(151, 330),
             "ledCorner1": tg1,

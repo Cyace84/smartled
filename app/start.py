@@ -90,9 +90,9 @@ strips = {
             "ledRoof3": range(1, 179),
             "ledRoof4": range(180, 331),
             "ledCorner1": tg1,
-            "ledCorner1": tg2,
-            "ledCorner1": tg3,
-            "ledCorner1": tg4
+            "ledCorner2": tg2,
+            "ledCorner3": tg3,
+            "ledCorner4": tg4
         }
 
 def set_color(data):
@@ -115,13 +115,14 @@ def set_color(data):
             roof2.write()
         else:
 
-            if led[:4] == "roof":
-                if led in ["roof1", "roof2"]:
+            if led[3:4] == "Roof":
+                if led in ["ledRoof1", "ledRoof2"]:
                     _set_color(roof1, led, color)
                 else:
                     _set_color(roof2, led, color)
             else:
                 strips[led].fill(color)
+                strips[led].write()
 
 
 

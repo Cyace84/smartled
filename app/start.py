@@ -69,13 +69,13 @@ tg2.fill((0,0,0))
 tg3.fill((0,0,0))
 tg4.fill((0,0,0))
 
-for i in range(76):
-    tg1[i] = (0, 87, 184)
+#for i in range(76):
+#    tg1[i] = (0, 87, 184)
 
 
-for i in range(76, 149):
+#for i in range(76, 149):
 
-    tg1[i] = (255, 216, 0)
+#    tg1[i] = (255, 216, 0)
 
 roof1.write()
 roof2.write()
@@ -93,9 +93,9 @@ def _set_color(pin_parent, pin, color: tuple):
 
 strips = {
             "ledRoof1": range(1, 179),
-            "ledRoof2": range(180, 331),
+            "ledRoof2": range(180, 330),
             "ledRoof3": range(1, 179),
-            "ledRoof4": range(180, 331),
+            "ledRoof4": range(180, 330),
             "ledCorner1": tg1,
             "ledCorner2": tg2,
             "ledCorner3": tg3,
@@ -122,7 +122,7 @@ def set_color(data):
             roof2.write()
         else:
 
-            if led[3:4] == "Roof":
+            if led[3:-1] == "Roof":
                 if led in ["ledRoof1", "ledRoof2"]:
                     _set_color(roof1, led, color)
                 else:

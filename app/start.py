@@ -69,6 +69,11 @@ tg2.fill((0,0,0))
 tg3.fill((0,0,0))
 tg4.fill((0,0,0))
 
+for i in range(1,75:
+    tg1[i] = (0,87, 184)
+
+for i in range(76, 150):
+    tg1[i] = (255, 216, 0)
 
 roof1.write()
 roof2.write()

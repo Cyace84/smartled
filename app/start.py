@@ -30,7 +30,7 @@ pin2 = machine.Pin(2, machine.Pin.OUT)
 
 
 
-from app.micropyserver import MicroPyServer
+from micropyserver import MicroPyServer
 
 server = MicroPyServer()
 """ add request handler """
@@ -69,10 +69,12 @@ tg2.fill((0,0,0))
 tg3.fill((0,0,0))
 tg4.fill((0,0,0))
 
-for i in range(1,75):
-    tg1[i] = (0,87, 184)
+for i in range(76):
+    tg1[i] = (0, 87, 184)
 
-for i in range(76, 150):
+
+for i in range(76, 149):
+
     tg1[i] = (255, 216, 0)
 
 roof1.write()

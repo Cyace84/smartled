@@ -64,7 +64,7 @@ tg4 = neopixel.NeoPixel(machine.Pin(23), 149)
 
 roof1.fill((0,0,0))
 roof2.fill((0,0,0))
-tg1.fill((0,0,0))
+tg1.fill((50,0,0))
 tg2.fill((0,0,0))
 tg3.fill((0,0,0))
 tg4.fill((0,0,0))

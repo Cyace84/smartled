@@ -14,9 +14,6 @@ modes = {
 }
 
 
-def create_task():
-    thread.start_new_thread(rainbow_cycle, ())
-
 
 def delete_task():
     modes["rainbow"] = "off"
@@ -40,15 +37,15 @@ def rainbow_cycle():
     j = 0
     while modes["rainbow"] == "on":
         j += 1
-        for i in range(330):
-            rc_index = (i * 256 // 330) + j
+        for i in range(328):
+            rc_index = (i * 256 // 328) + j
             roof1[i] = wheel(rc_index & 255)
-        pin2.on()
         time.sleep(0.5)
         roof1.write()
-        pin2.off()
-
     return
 
 
+
+def create_task():
+    thread.start_new_thread(rainbow_cycle, ())
 

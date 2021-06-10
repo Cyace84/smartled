@@ -97,13 +97,7 @@ def rainbow_cycle(slow=0):
             if ss > 29:
                 roof1.write()
                 ss = 0
-
-
         roof1.write()
-        li.append(time.time())
-        if len(li) > 20:
-            modes["rainbow"] = "off"
-            print(li[0], li[-1:])
     return
 
 

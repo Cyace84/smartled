@@ -28,9 +28,9 @@ print("Device IP:", wlan.ifconfig()[0])
 
 pin2 = machine.Pin(2, machine.Pin.OUT)
 
-pin2.on()
 
-from micropyserver import MicroPyServer
+
+from app.micropyserver import MicroPyServer
 
 server = MicroPyServer()
 """ add request handler """
@@ -51,7 +51,7 @@ def parse_data(data):
     return new_data
 
 
-pin2.off()
+
 
 roof1 = neopixel.NeoPixel(machine.Pin(4), 330)
 roof2 = neopixel.NeoPixel(machine.Pin(5), 330)
@@ -60,15 +60,15 @@ tg2 = neopixel.NeoPixel(machine.Pin(21), 149)
 tg3 = neopixel.NeoPixel(machine.Pin(22), 149)
 tg4 = neopixel.NeoPixel(machine.Pin(23), 149)
 
-pin2.on()
+
 
 roof1.fill((0,0,0))
 roof2.fill((0,0,0))
-tg1.fill((50,0,0))
+tg1.fill((0,0,0))
 tg2.fill((0,0,0))
 tg3.fill((0,0,0))
 tg4.fill((0,0,0))
-pin2.off()
+
 #for i in range(76):
 #    tg1[i] = (0, 87, 184)
 
@@ -83,9 +83,9 @@ tg1.write()
 tg2.write()
 tg3.write()
 tg4.write()
-pin2.on()
-#dynamic = __import__("dynamic")
-#dynamic.create_task()
+
+import app.dynamic
+dynamic.create_task()
 
 def _set_color(pin_parent, pin, color: tuple):
 
@@ -133,7 +133,7 @@ def set_color(data):
                 strips[led].fill(color)
                 strips[led].write()
 
-pin2.off()
+
 def index(request, q):
     """ request handler """
 
@@ -141,9 +141,9 @@ def index(request, q):
     data = parse_data(request.split("\r\n\r\n")[-1])
     if data.get("color"):
         set_color(data)
-
+        dynamic.delete_task()
     server.send("wqeqweq")
-pin2.on()
+
 
 server.add_route("/", index)
 

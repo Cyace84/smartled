@@ -9,7 +9,7 @@ class NeoPixel:
     ORDER = (1, 0, 2, 3)
     __slots__ = ("pin", "n", "bpp", "buf", "timing")
 
-    def __init__(self, pin, n, bpp=3, timing=0.1):
+    def __init__(self, pin, n, bpp=3, timing=1):
         self.pin = pin
         self.n = n
         self.bpp = bpp
@@ -76,10 +76,18 @@ def brightness_control(color, brightness=1):
 pin2 = machine.Pin(2, machine.Pin.OUT)
 
 
-def set_color(j, led, n1, n2):
-    for i in range(n1, n2):
+def set_color(j):
+    lis = bytearray(330*3)
+    ORDER = (1, 0, 2, 3)
+    for i in range(330):
+        offset = i * 3
         rc_index = (i * 256 // 328) + j
-        led[i] = brightness_control(wheel(rc_index & 255))
+        color = wheel(rc_index & 255)
+        for s in range(3):
+            lis[offset + ORDER[s]] = color[s]
+
+    return lis
+
 
 
 
@@ -89,15 +97,16 @@ def rainbow_cycle(slow=0):
 
     while modes["rainbow"] == "on":
         j += 1
-        ss = 0
-        for i in range(330):
-            ss+= 1
-            rc_index = (i * 256 // 328) + j
-            roof1[i] = wheel(rc_index & 255)
-            if ss > 29:
-                roof1.write()
-                ss = 0
+        #for i in range(330):
+        #    rc_index = (i * 256 // 328) + j
+        #    roof1[i] = wheel(rc_index & 255)
+        ss = set_color(j)
+        roof1.buf = ss
         roof1.write()
+        li.append(time.time())
+        if len(li) > 50:
+            print(li[0], li[-1:])
+            break
     return
 
 

@@ -47,6 +47,7 @@ def rainbow_cycle():
         time.sleep(0.5)
         roof1.write()
         pin2.off()
+
     return
 
 

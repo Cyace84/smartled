@@ -134,14 +134,6 @@ def set_color(data):
                 strips[led].write()
 
 
-
-def cycle():
-    s = 1
-    while True:
-        s +=1
-        time.sleep(1)
-        print(s)
-
 def index(request, q):
     """ request handler """
 
@@ -153,10 +145,7 @@ def index(request, q):
     server.send("wqeqweq")
 
 
-
-
 server.add_route("/", index)
-
 
 
 

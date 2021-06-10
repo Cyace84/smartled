@@ -49,11 +49,12 @@ def rainbow_cycle(slow=0):
     j = 0
     while modes["rainbow"] == "on":
         j += 1
-        for i in range(328):
+        for i in range(30):
             rc_index = (i * 256 // 328) + j
             roof1[i] = brightness_control(wheel(rc_index & 255), brightness=0.5)
         time.sleep(slow)
         roof1.write()
+
     return
 
 

@@ -84,8 +84,8 @@ tg2.write()
 tg3.write()
 tg4.write()
 
-dynamic = __import__("dynamic")
-dynamic.create_task()
+#dynamic = __import__("dynamic")
+#dynamic.create_task()
 
 def _set_color(pin_parent, pin, color: tuple):
 

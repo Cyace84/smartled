@@ -35,7 +35,7 @@ def wheel(pos):
     pos -= 170
     return (pos * 3, 0, 255 - pos * 3)
 
-
+pin2 = machine.Pin(2, machine.Pin.OUT)
 def rainbow_cycle():
     j = 0
     while modes["rainbow"] == "on":
@@ -43,9 +43,10 @@ def rainbow_cycle():
         for i in range(330):
             rc_index = (i * 256 // 330) + j
             roof1[i] = wheel(rc_index & 255)
-
+        pin2.on()
         time.sleep(0.5)
         roof1.write()
+        pin2.off()
     return
 
 

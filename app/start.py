@@ -147,10 +147,9 @@ def index(request, q):
 
     #response = "{}".format(wlan.ifconfig()[0])
     data = parse_data(request.split("\r\n\r\n")[-1])
-    print(data)
     if data.get("color"):
         set_color(data)
-    dynamic.delete_task()
+        dynamic.delete_task()
     server.send("wqeqweq")
 
 

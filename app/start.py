@@ -30,7 +30,7 @@ pin2 = machine.Pin(2, machine.Pin.OUT)
 
 
 
-from app.micropyserver import MicroPyServer
+from micropyserver import MicroPyServer
 
 server = MicroPyServer()
 """ add request handler """
@@ -84,6 +84,9 @@ tg2.write()
 tg3.write()
 tg4.write()
 
+import dynamic
+dynamic.create_task()
+
 def _set_color(pin_parent, pin, color: tuple):
 
     for i in strips[pin]:
@@ -106,7 +109,6 @@ def set_color(data):
     for led in data["strips"]:
         color = data["color"]
         if led == "cornersAll":
-            print(led)
             tg1.fill(color)
             tg2.fill(color)
             tg3.fill(color)
@@ -133,7 +135,12 @@ def set_color(data):
 
 
 
-
+def cycle():
+    s = 1
+    while True:
+        s +=1
+        time.sleep(1)
+        print(s)
 
 def index(request, q):
     """ request handler """
@@ -143,10 +150,14 @@ def index(request, q):
     print(data)
     if data.get("color"):
         set_color(data)
+    dynamic.delete_task()
     server.send("wqeqweq")
 
 
+
+
 server.add_route("/", index)
+
 
 
 

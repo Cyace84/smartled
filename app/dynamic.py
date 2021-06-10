@@ -9,7 +9,7 @@ class NeoPixel:
     ORDER = (1, 0, 2, 3)
     __slots__ = ("pin", "n", "bpp", "buf", "timing")
 
-    def __init__(self, pin, n, bpp=3, timing=1):
+    def __init__(self, pin, n, bpp=3, timing=0):
         self.pin = pin
         self.n = n
         self.bpp = bpp

@@ -103,10 +103,10 @@ def rainbow_cycle(slow=0):
         ss = set_color(j)
         roof1.buf = ss
         roof1.write()
-        li.append(time.time())
-        if len(li) > 50:
-            print(li[0], li[-1:])
-            break
+        #li.append(time.time())
+        #if len(li) > 50:
+        #    print(li[0], li[-1:])
+        #    break
     return
 
 

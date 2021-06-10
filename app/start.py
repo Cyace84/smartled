@@ -141,7 +141,7 @@ def index(request, q):
     data = parse_data(request.split("\r\n\r\n")[-1])
     if data.get("color"):
         set_color(data)
-        dynamic.delete_task()
+
     server.send("wqeqweq")
 
 

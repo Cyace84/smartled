@@ -32,15 +32,27 @@ def wheel(pos):
     pos -= 170
     return (pos * 3, 0, 255 - pos * 3)
 
+def brightness_control(color, brightness=1):
+    new_color = []
+    for i in color:
+        if i > i*brightness:
+            new_color.append(int(i*brightness))
+        else:
+            new_color.append(i)
+
+    return tuple(new_color)
+
 pin2 = machine.Pin(2, machine.Pin.OUT)
-def rainbow_cycle():
+
+
+def rainbow_cycle(slow=0):
     j = 0
     while modes["rainbow"] == "on":
         j += 1
         for i in range(328):
             rc_index = (i * 256 // 328) + j
-            roof1[i] = wheel(rc_index & 255)
-        time.sleep(0.5)
+            roof1[i] = brightness_control(wheel(rc_index & 255), brightness=0.5)
+        time.sleep(slow)
         roof1.write()
     return
 

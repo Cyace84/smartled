@@ -85,8 +85,9 @@ tg2.write()
 tg3.write()
 tg4.write()
 
+import _thread
 
-dynamic.create_task()
+thread.start_new_thread(dynamic.create_task())
 
 def _set_color(pin_parent, pin, color: tuple):
 

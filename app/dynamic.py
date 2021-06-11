@@ -165,7 +165,7 @@ w = uasyncio.gather(
 
 
 tg1.write()
-#loop2.run_until_complete(w)
+loop2.run_until_complete(w)
 
-thread.start_new_thread(loop2.run_until_complete(w))
+
 

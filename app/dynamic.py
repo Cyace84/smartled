@@ -106,31 +106,35 @@ def set_color(j):
     return bytearray(eval(l))
 
 
-def rainbow_cycle(n1, n2, slow=0):
+async def rainbow_cycle(n1, n2, slow=0):
     j = 0
     li = []
-
+    print("start")
     while modes["rainbow"] == "on":
         j += 1
-        for i in range(n1, n2):
+        for i in range(33):
             rc_index = (i * 256 // 328) + j
             roof1[i] = wheel(rc_index & 255)
         roof1.write()
 
-        #ss = set_color(j)
-        #roof1.buf = ss
-        #
         #li.append(time.time())
+        await uasyncio.sleep_ms(10)
         #if len(li) > 50:
         #    print(li[0], li[-1:])
-        #    print(roof1.buf)
         #    break
+
     return
 
 
-def create_task():
-    thread.start_new_thread(rainbow_cycle, (0, 100))
-    thread.start_new_thread(rainbow_cycle, (100, 200))
-    thread.start_new_thread(rainbow_cycle, (200, 330))
+loop = uasyncio.get_event_loop()
+w = uasyncio.gather(
+    rainbow_cycle(0,100),
+    rainbow_cycle(100,200),
+    rainbow_cycle(200,330)
+)
 
-create_task()
+loop.run_until_complete(w)
+#uasyncio.run(main())
+#uasyncio.run(rainbow_cycle(1,2))
+#uasyncio.run(rainbow_cycle(1,2))
+#create_task()

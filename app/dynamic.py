@@ -137,7 +137,7 @@ async def flame_cycle():
         r = 226
         g = 121
         b = 35
-        for i in range(0, 100):
+        for i in [i for i in range(0, 100)].reverse:
             flicker = random.randint(0,55)
             r1 = r - flicker
             g1 = g - flicker
@@ -147,7 +147,8 @@ async def flame_cycle():
             g1 = g1 if g1 > 0 else 0
             b1 = b1 if b1 > 0 else 0
             tg1[i] = (r1, g1, b1)
-        tg1.write()
+            tg1.write()
+
         await uasyncio.sleep_ms(random.randint(10,113))
 
 loop2 = uasyncio.get_event_loop()

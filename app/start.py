@@ -87,7 +87,7 @@ tg4.write()
 
 import _thread
 
-thread.start_new_thread(dynamic.create_task())
+_thread.start_new_thread(dynamic.create_task, ())
 
 def _set_color(pin_parent, pin, color: tuple):
 
@@ -154,5 +154,6 @@ server.add_route("/", index)
 """ start server """
 
 
-
-thread.start_new_thread(server.start())
+def ww():
+    server.start()
+_thread.start_new_thread(ww, ())

@@ -134,9 +134,12 @@ async def flame_cycle():
     #  Regular (orange) flame:
 
     while modes["flame"] == "on":
-        r = 226
-        g = 121
-        b = 0
+        #r = 226
+        #g = 121
+        #b = 0
+        r = 158
+        g = 8
+        b = 148
         rrr = random.randint(100, 149)
         leds = [i for i in range(0, rrr)]
         leds.reverse()
@@ -160,12 +163,9 @@ w = uasyncio.gather(
    flame_cycle()
 )
 
-tg1[10] = (108, 56, 13)
-tg1[20] = (106, 53, 10)
-tg1[30] = (95, 43, 0)
-tg1[40] = (109, 56, 13)
-tg1[50] = (104, 51, 8)
-tg1[60] = (108, 56, 13)
+
 tg1.write()
-loop2.run_until_complete(w)
+#loop2.run_until_complete(w)
+
+thread.start_new_thread(loop2.run_until_complete(w))
 

@@ -136,7 +136,7 @@ async def flame_cycle():
     while modes["flame"] == "on":
         r = 226
         g = 121
-        b = 35
+        b = 0
         rrr = random.randint(100, 149)
         leds = [i for i in range(0, rrr)]
         leds.reverse()
@@ -150,7 +150,6 @@ async def flame_cycle():
             g1 = g1 if g1 > 0 else 0
             b1 = b1 if b1 > 0 else 0
             tg1[i] = brightness_control((r1, g1, b1), 0.3)
-            print(tg1[i])
             tg1.write()
 
         await uasyncio.sleep_ms(random.randint(250,500))
@@ -168,5 +167,5 @@ tg1[40] = (109, 56, 13)
 tg1[50] = (104, 51, 8)
 tg1[60] = (108, 56, 13)
 tg1.write()
-#loop2.run_until_complete(w)
+loop2.run_until_complete(w)
 

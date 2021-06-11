@@ -41,7 +41,6 @@ def parse_data(data):
     data = data.replace("%5B%5D", "").replace("+", "").replace("%2C", ",").replace("rgb", "").split("&")
     new_data = {"strips": []}
     for i in data:
-        print(data)
         k = i.split("=")[0]
         v = i.split("=")[1]
         if k == "color":
@@ -87,7 +86,7 @@ tg3.write()
 tg4.write()
 
 
-#dynamic.create_task()
+dynamic.create_task()
 
 def _set_color(pin_parent, pin, color: tuple):
 

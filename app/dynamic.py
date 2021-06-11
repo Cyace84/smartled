@@ -112,7 +112,7 @@ async def rainbow_cycle(n1, n2, slow=0):
     print("start")
     while modes["rainbow"] == "on":
         j += 1
-        for i in range(33):
+        for i in range(n1, n2):
             rc_index = (i * 256 // 328) + j
             roof1[i] = wheel(rc_index & 255)
         roof1.write()

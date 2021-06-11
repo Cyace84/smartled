@@ -15,9 +15,12 @@ pin2.on()
 time.sleep(2)
 pin2.off()
 
-
-from app.dynamic import create_task
-from app.micropyserver import MicroPyServer
+try:
+    from app.dynamic import create_task
+    from app.micropyserver import MicroPyServer
+except:
+    from dynamic import create_task
+    from micropyserver import MicroPyServer
 
 wlan_id = "TP-LINK_3EA72E"#secrets.WIFI_SSID#"TP-LINK_0876"#
 wlan_pass = "20627653"#secrets.WIFI_PASSWORD#"45275838"#
@@ -165,6 +168,8 @@ time.sleep(2)
 pin2.off()
 def ww():
     server.start()
-_thread.start_new_thread(ww, ())
 
 _thread.start_new_thread(create_task, ("flame"))
+_thread.start_new_thread(ww, ())
+
+

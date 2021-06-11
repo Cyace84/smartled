@@ -50,31 +50,18 @@ def delete_task():
     modes["rainbow"] = "off"
 
 
-#def wheel(pos):
-#    # Input a value 0 to 255 to get a color value.
-#    # The colours are a transition r - g - b - back to r.
-#    if pos < 0 or pos > 255:
-#        return (0, 0, 0)
-#    if pos < 85:
-#        return (255 - pos * 3, pos * 3, 0)
-#    if pos < 170:
-#        pos -= 85
-#        return (0, 255 - pos * 3, pos * 3)
-#    pos -= 170
-#    return (pos * 3, 0, 255 - pos * 3)
-
 def wheel(pos):
     # Input a value 0 to 255 to get a color value.
     # The colours are a transition r - g - b - back to r.
     if pos < 0 or pos > 255:
         return (0, 0, 0)
     if pos < 85:
-        return ( pos * 3, 255 - pos * 3, 0)
+        return (255 - pos * 3, pos * 3, 0)
     if pos < 170:
         pos -= 85
-        return ( 255 - pos * 3, 0, pos * 3)
+        return (0, 255 - pos * 3, pos * 3)
     pos -= 170
-    return (0, pos * 3,  255 - pos * 3)
+    return (pos * 3, 0, 255 - pos * 3)
 
 
 def brightness_control(color, brightness=1):
@@ -105,6 +92,11 @@ def set_color(j):
 
     return bytearray(eval(l))
 
+async def q(j, n1, n2):
+    for i in range(n1, n2):
+            rc_index = (i * 256 // 328) + j
+            roof1[i] = wheel(rc_index & 255)
+            await uasyncio.sleep_ms(10)
 
 async def rainbow_cycle(n1, n2, slow=0):
     j = 0
@@ -112,16 +104,12 @@ async def rainbow_cycle(n1, n2, slow=0):
     print("start")
     while modes["rainbow"] == "on":
         j += 1
-        roof1.fill((110,0,0))
-        roof1.write()
-        for i in range(n1, n2):
-            rc_index = (i * 256 // 328) + j
-            #roof1[i] = wheel(rc_index & 255)
-
-
+        loop = uasyncio.get_event_loop()
+        w = uasyncio.gather(q(j,0,50), q(j,50,100), q(j,100,150), q(j,150,200),  q(j,250,300))
+        loop.run_until_complete(w)
         #li.append(time.time())
         await uasyncio.sleep_ms(10)
-        roof1.fill((0,0,0))
+
         roof1.write()
         #if len(li) > 50:
         #    print(li[0], li[-1:])
@@ -132,13 +120,8 @@ async def rainbow_cycle(n1, n2, slow=0):
 
 loop = uasyncio.get_event_loop()
 w = uasyncio.gather(
-    rainbow_cycle(0,50),
-    rainbow_cycle(50,100),
-    rainbow_cycle(100,150),
-    rainbow_cycle(150,200),
-    rainbow_cycle(250,330),
-
-)
+    rainbow_cycle(0,50)
+    )
 
 loop.run_until_complete(w)
 #uasyncio.run(main())

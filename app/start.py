@@ -10,6 +10,10 @@ import machine, neopixel
 import re
 import random
 #from app import secrets
+pin2 = machine.Pin(2, machine.Pin.OUT)
+pin2.on()
+time.sleep(2)
+pin2.off()
 
 from micropyserver import MicroPyServer
 try:
@@ -34,10 +38,7 @@ if wlan.isconnected() == False:
             wlan.connect("default", "12345678")
 print("Device IP:", wlan.ifconfig()[0])
 
-pin2 = machine.Pin(2, machine.Pin.OUT)
-pin2.on()
-time.sleep(2)
-pin2.off()
+
 
 
 

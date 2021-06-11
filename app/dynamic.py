@@ -175,7 +175,7 @@ loop2 = uasyncio.get_event_loop()
 
 
 
-def create_task():
+def create_task(mode_name):
 
     if mode_name == "flame":
         w = uasyncio.gather(flame_cycle(tg1))

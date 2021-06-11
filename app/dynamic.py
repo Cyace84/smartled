@@ -167,6 +167,6 @@ tg1[30] = (95, 43, 0)
 tg1[40] = (109, 56, 13)
 tg1[50] = (104, 51, 8)
 tg1[60] = (108, 56, 13)
-tg1.write
+tg1.write()
 #loop2.run_until_complete(w)
 

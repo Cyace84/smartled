@@ -1,5 +1,5 @@
 import time
-
+import random
 import machine
 import _thread as thread
 from esp import neopixel_write
@@ -41,7 +41,8 @@ tg3 = NeoPixel(machine.Pin(22), 149)
 tg4 = NeoPixel(machine.Pin(23), 149)
 
 modes = {
-    "rainbow": "on"
+    "rainbow": "off",
+    "flame": "on"
 }
 
 
@@ -103,29 +104,57 @@ async def rainbow_cycle(n1, n2, slow=0):
             roof1[i] = wheel(rc_index & 255)
 
 
-        #li.append(time.time())
-        await uasyncio.sleep_ms(1)
-        neopixel_write(roof1.pin, roof1.buf[n1:n2], 1)
-        #roof1.write()
-        #if len(li) > 50:
-        #    print(li[0], li[-1:])
-        #    break
+        li.append(time.time())
+        await uasyncio.sleep_ms(0)
+
+        roof1.write()
+        if len(li) > 50:
+            print(li[0], li[-1:])
+            return
 
     return
 
 
-loop = uasyncio.get_event_loop()
-w = uasyncio.gather(
-    rainbow_cycle(0,50),
-    rainbow_cycle(50,100),
-    rainbow_cycle(100,150),
-    rainbow_cycle(150,200),
-    rainbow_cycle(250,330),
+#loop = uasyncio.get_event_loop()
+#w = uasyncio.gather(
+#    rainbow_cycle(0,150),
+#    rainbow_cycle(150,330),
 
-)
 
-loop.run_until_complete(w)
+#)
+
+#loop.run_until_complete(w)
+
 #uasyncio.run(main())
 #uasyncio.run(rainbow_cycle(1,2))
 #uasyncio.run(rainbow_cycle(1,2))
 #create_task()
+
+async def flame_cycle():
+    #  Regular (orange) flame:
+
+    while modes["flame"] == "on":
+        r = 226
+        g = 121
+        b = 35
+        for i in range(0, 100):
+            flicker = random.randint(0,55)
+            r1 = r - flicker
+            g1 = g - flicker
+            b1 = g - flicker
+
+            r1 = 0 if r1 < 0 else 0
+            g1 = g1 if g1 > 0 else 0
+            b1 = b1 if b1 > 0 else 0
+            tg1[i] = (r1, g1, b1)
+        tg1.write()
+        await uasyncio.sleep_ms(random.randint(10,113))
+
+loop2 = uasyncio.get_event_loop()
+
+w = uasyncio.gather(
+   flame_cycle()
+)
+
+loop2.run_until_complete(w)
+

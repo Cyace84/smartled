@@ -16,13 +16,10 @@ time.sleep(2)
 pin2.off()
 
 from micropyserver import MicroPyServer
-try:
-    from dynamic import create_task
-    from micropyserver import MicroPyServer
 
-except:
-    from app.dynamic import create_task
-    from app.micropyserver import MicroPyServer
+
+from app.dynamic import create_task
+from app.micropyserver import MicroPyServer
 
 wlan_id = "TP-LINK_3EA72E"#secrets.WIFI_SSID#"TP-LINK_0876"#
 wlan_pass = "20627653"#secrets.WIFI_PASSWORD#"45275838"#

@@ -50,18 +50,32 @@ def delete_task():
     modes["rainbow"] = "off"
 
 
+#def wheel(pos):
+#    # Input a value 0 to 255 to get a color value.
+#    # The colours are a transition r - g - b - back to r.
+#    if pos < 0 or pos > 255:
+#        return (0, 0, 0)
+#    if pos < 85:
+#        return (255 - pos * 3, pos * 3, 0)
+#    if pos < 170:
+#        pos -= 85
+#        return (0, 255 - pos * 3, pos * 3)
+#    pos -= 170
+#    return (pos * 3, 0, 255 - pos * 3)
+
 def wheel(pos):
     # Input a value 0 to 255 to get a color value.
     # The colours are a transition r - g - b - back to r.
     if pos < 0 or pos > 255:
         return (0, 0, 0)
     if pos < 85:
-        return (255 - pos * 3, pos * 3, 0)
+        return ( pos * 3, 255 - pos * 3, 0)
     if pos < 170:
         pos -= 85
-        return (0, 255 - pos * 3, pos * 3)
+        return ( 255 - pos * 3, 0, pos * 3)
     pos -= 170
-    return (pos * 3, 0, 255 - pos * 3)
+    return (0, pos * 3,  255 - pos * 3)
+
 
 def brightness_control(color, brightness=1):
     new_color = []
@@ -77,40 +91,46 @@ pin2 = machine.Pin(2, machine.Pin.OUT)
 
 
 def set_color(j):
-    lis = bytearray(330*3)
+    #lis = bytearray(330*3)
     ORDER = (1, 0, 2, 3)
-    for i in range(330):
-        offset = i * 3
-        rc_index = (i * 256 // 328) + j
-        color = wheel(rc_index & 255)
-        for s in range(3):
-            lis[offset + ORDER[s]] = color[s]
+    #for i in range(330):
+        #offset = i * 3
+        #rc_index = (i * 256 // 328) + j
+        #color = wheel(rc_index & 255)
+        #lis[i]  = 255
+        #for s in range(3):
+        #    lis[offset + ORDER[s]] = color[s]
+    l = [wheel(i * 256 // 328 + j & 255) for i in range(330)]
+    l = str(l).replace("(", "").replace(")", "")
 
-    return lis
+    return bytearray(eval(l))
 
 
-
-
-def rainbow_cycle(slow=0):
+def rainbow_cycle(n1, n2, slow=0):
     j = 0
     li = []
 
     while modes["rainbow"] == "on":
         j += 1
-        #for i in range(330):
-        #    rc_index = (i * 256 // 328) + j
-        #    roof1[i] = wheel(rc_index & 255)
-        ss = set_color(j)
-        roof1.buf = ss
+        for i in range(n1, n2):
+            rc_index = (i * 256 // 328) + j
+            roof1[i] = wheel(rc_index & 255)
         roof1.write()
+
+        #ss = set_color(j)
+        #roof1.buf = ss
+        #
         #li.append(time.time())
         #if len(li) > 50:
         #    print(li[0], li[-1:])
+        #    print(roof1.buf)
         #    break
     return
 
 
 def create_task():
-    thread.start_new_thread(rainbow_cycle, ())
+    thread.start_new_thread(rainbow_cycle, (0, 100))
+    thread.start_new_thread(rainbow_cycle, (100, 200))
+    thread.start_new_thread(rainbow_cycle, (200, 330))
 
 create_task()

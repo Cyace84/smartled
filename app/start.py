@@ -153,7 +153,7 @@ def index(request, q):
     data = parse_data(request.split("\r\n\r\n")[-1])
     if data.get("color"):
         set_color(data)
-        dynamic.delete_task()
+        _thread.start_new_thread(create_task, ("flame"))
     server.send("wqeqweq")
 
 
@@ -169,7 +169,7 @@ pin2.off()
 def ww():
     server.start()
 
-_thread.start_new_thread(create_task, ("flame"))
+
 _thread.start_new_thread(ww, ())
 
 

@@ -49,6 +49,7 @@ modes = {
 
 def delete_task():
     modes["rainbow"] = "off"
+    modes["flame"] =  "off"
 
 
 def wheel(pos):
@@ -130,19 +131,34 @@ async def rainbow_cycle(n1, n2, slow=0):
 #uasyncio.run(rainbow_cycle(1,2))
 #create_task()
 
-async def flame_cycle():
+async def flame_cycle(led, color="orange", brightness=0.1, speed=3):
     #  Regular (orange) flame:
 
-    while modes["flame"] == "on":
-        #r = 226
-        #g = 121
-        #b = 0
+    if color == "orange":
+        r = 226
+        g = 121
+        b = 0
+    elif color == "purple":
         r = 158
         g = 8
         b = 148
-        rrr = random.randint(100, 149)
-        leds = [i for i in range(0, rrr)]
-        leds.reverse()
+
+    _delay = {
+        0: 0,
+        1: random.randint(50,100),
+        2: random.randint(100,300),
+        3: random.randint(250,500),
+        4: random.randint(500,1000),
+        5: random.randint(1000,2000)
+        }
+
+    while modes["flame"] == "on":
+
+        if led in [tg1, tg2, tg3, tg4]:
+            leds = [i for i in range(149)]
+            leds.reverse()
+
+
         for i in leds:
             flicker = random.randint(0,55)
             r1 = r - flicker
@@ -152,20 +168,21 @@ async def flame_cycle():
             r1 = r1 if r1 > 0 else 0
             g1 = g1 if g1 > 0 else 0
             b1 = b1 if b1 > 0 else 0
-            tg1[i] = brightness_control((r1, g1, b1), 0.1)
+            tg1[i] = brightness_control((r1, g1, b1), brightness)
 
         tg1.write()
         await uasyncio.sleep_ms(random.randint(250,500))
 
 loop2 = uasyncio.get_event_loop()
 
-w = uasyncio.gather(
-   flame_cycle()
-)
 
 
-tg1.write()
-loop2.run_until_complete(w)
+def create_task(mode_name="flame"):
+    if mode_name == "flame":
+        w = uasyncio.gather(flame_cycle(tg1))
+        loop2.run_until_complete(w)
 
 
+if __name__ == "__main__":
+    pass
 

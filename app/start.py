@@ -11,9 +11,14 @@ import re
 import random
 #from app import secrets
 
-from app.micropyserver import MicroPyServer
-from app import dynamic
-#import dynamic
+from micropyserver import MicroPyServer
+try:
+    from app import dynamic
+    from app.micropyserver import MicroPyServer
+except:
+    import dynamic
+    from micropyserver import MicroPyServer
+
 wlan_id = "TP-LINK_3EA72E"#secrets.WIFI_SSID#"TP-LINK_0876"#
 wlan_pass = "20627653"#secrets.WIFI_PASSWORD#"45275838"#
 
@@ -87,7 +92,7 @@ tg4.write()
 
 import _thread
 
-_thread.start_new_thread(dynamic.create_task, ())
+#read.start_new_thread(dynamic.create_task, ())
 
 def _set_color(pin_parent, pin, color: tuple):
 
@@ -157,3 +162,5 @@ server.add_route("/", index)
 def ww():
     server.start()
 _thread.start_new_thread(ww, ())
+print(1)
+_thread.start_new_thread(dynamic.create_task, ())

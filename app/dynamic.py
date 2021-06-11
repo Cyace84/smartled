@@ -152,7 +152,6 @@ async def flame_cycle(led, color="orange", brightness=0.1, speed=3):
         5: random.randint(1000,2000)
         }
     while modes["flame"] == "on":
-        print(1)
 
         if led in [tg1, tg2, tg3, tg4]:
             leds = [i for i in range(149)]
@@ -179,7 +178,7 @@ loop2 = uasyncio.get_event_loop()
 def create_task(mode_name="flame"):
 
     if mode_name == "flame":
-        w = uasyncio.gather(flame_cycle(tg1), flame_cycle(tg2), flame_cycle(tg3), flame_cycle(tg4))
+        w = uasyncio.gather(flame_cycle(tg1), flame_cycle(tg2))
         loop2.run_until_complete(w)
 
 

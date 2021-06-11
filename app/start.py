@@ -13,10 +13,10 @@ import random
 
 from micropyserver import MicroPyServer
 try:
-    from app import dynamic
+    from app.dynamic import create_task
     from app.micropyserver import MicroPyServer
 except:
-    import dynamic
+    from dynamic import create_task
     from micropyserver import MicroPyServer
 
 wlan_id = "TP-LINK_3EA72E"#secrets.WIFI_SSID#"TP-LINK_0876"#
@@ -35,6 +35,9 @@ if wlan.isconnected() == False:
 print("Device IP:", wlan.ifconfig()[0])
 
 pin2 = machine.Pin(2, machine.Pin.OUT)
+pin2.on()
+time.sleep(2)
+pin2.off()
 
 
 
@@ -92,7 +95,6 @@ tg4.write()
 
 import _thread
 
-#read.start_new_thread(dynamic.create_task, ())
 
 def _set_color(pin_parent, pin, color: tuple):
 
@@ -158,9 +160,11 @@ server.add_route("/", index)
 
 """ start server """
 
-
+pin2.on()
+time.sleep(2)
+pin2.off()
 def ww():
     server.start()
 _thread.start_new_thread(ww, ())
 
-_thread.start_new_thread(dynamic.create_task, ())
+_thread.start_new_thread(create_task, ())

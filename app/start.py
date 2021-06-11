@@ -11,9 +11,7 @@ import re
 import random
 #from app import secrets
 pin2 = machine.Pin(2, machine.Pin.OUT)
-pin2.on()
-time.sleep(2)
-pin2.off()
+
 
 try:
     from app.dynamic import create_task
@@ -36,13 +34,6 @@ if wlan.isconnected() == False:
         if sleep > 10:
             wlan.connect("default", "12345678")
 print("Device IP:", wlan.ifconfig()[0])
-
-pin2.on()
-time.sleep(2)
-pin2.off()
-
-
-
 
 
 server = MicroPyServer()
@@ -153,8 +144,10 @@ def index(request, q):
     data = parse_data(request.split("\r\n\r\n")[-1])
     if data.get("color"):
         set_color(data)
-        _thread.start_new_thread(create_task, ("flame"))
+
     server.send("wqeqweq")
+    print(111)
+
 
 
 server.add_route("/", index)
@@ -163,13 +156,11 @@ server.add_route("/", index)
 
 """ start server """
 
-pin2.on()
-time.sleep(2)
-pin2.off()
-def ww():
-    server.start()
+_thread.start_new_thread(create_task, ())
+
+server.start()
 
 
-_thread.start_new_thread(ww, ())
+
 
 

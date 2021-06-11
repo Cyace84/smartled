@@ -137,7 +137,8 @@ async def flame_cycle():
         r = 226
         g = 121
         b = 35
-        leds = [i for i in range(0, 100)]
+        rrr = random.randint(100, 150)
+        leds = [i for i in range(0, rrr)]
         leds.reverse()
         for i in leds:
             flicker = random.randint(0,55)

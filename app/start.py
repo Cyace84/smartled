@@ -15,8 +15,6 @@ pin2.on()
 time.sleep(2)
 pin2.off()
 
-from micropyserver import MicroPyServer
-
 
 from app.dynamic import create_task
 from app.micropyserver import MicroPyServer

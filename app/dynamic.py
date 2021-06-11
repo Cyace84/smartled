@@ -128,9 +128,7 @@ async def rainbow_cycle(n1, n2, slow=0):
 
 loop = uasyncio.get_event_loop()
 w = uasyncio.gather(
-    rainbow_cycle(0,100),
-    rainbow_cycle(100,200),
-    rainbow_cycle(200,330)
+    rainbow_cycle(0,100)
 )
 
 loop.run_until_complete(w)

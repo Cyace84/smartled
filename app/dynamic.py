@@ -149,7 +149,7 @@ async def flame_cycle():
             r1 = r1 if r1 > 0 else 0
             g1 = g1 if g1 > 0 else 0
             b1 = b1 if b1 > 0 else 0
-            tg1[i] = brightness_control((r1, g1, b1), 0.3)
+            tg1[i] = brightness_control((r1, g1, b1), 0.1)
             tg1.write()
 
         await uasyncio.sleep_ms(random.randint(250,500))

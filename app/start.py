@@ -36,6 +36,9 @@ if wlan.isconnected() == False:
             wlan.connect("default", "12345678")
 print("Device IP:", wlan.ifconfig()[0])
 
+pin2.on()
+time.sleep(2)
+pin2.off()
 
 
 

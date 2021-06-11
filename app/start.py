@@ -11,6 +11,9 @@ import re
 import random
 #from app import secrets
 
+from app.micropyserver import MicroPyServer
+from app import dynamic
+#import dynamic
 wlan_id = "TP-LINK_3EA72E"#secrets.WIFI_SSID#"TP-LINK_0876"#
 wlan_pass = "20627653"#secrets.WIFI_PASSWORD#"45275838"#
 
@@ -30,7 +33,6 @@ pin2 = machine.Pin(2, machine.Pin.OUT)
 
 
 
-from app.micropyserver import MicroPyServer
 
 server = MicroPyServer()
 """ add request handler """
@@ -84,8 +86,8 @@ tg2.write()
 tg3.write()
 tg4.write()
 
-from app import dynamic
-dynamic.create_task()
+
+#dynamic.create_task()
 
 def _set_color(pin_parent, pin, color: tuple):
 

@@ -153,6 +153,7 @@ async def flame_cycle(led, color="orange", brightness=0.1, speed=3):
         }
     while modes["flame"] == "on":
 
+
         if led in [tg1, tg2, tg3, tg4]:
             leds = [i for i in range(149)]
             leds.reverse()
@@ -166,9 +167,9 @@ async def flame_cycle(led, color="orange", brightness=0.1, speed=3):
             r1 = r1 if r1 > 0 else 0
             g1 = g1 if g1 > 0 else 0
             b1 = b1 if b1 > 0 else 0
-            tg1[i] = brightness_control((r1, g1, b1), brightness)
+            led[i] = brightness_control((r1, g1, b1), brightness)
 
-        tg1.write()
+        led.write()
         await uasyncio.sleep_ms(random.randint(250,500))
 
 loop2 = uasyncio.get_event_loop()
@@ -178,7 +179,7 @@ loop2 = uasyncio.get_event_loop()
 def create_task(mode_name="flame"):
 
     if mode_name == "flame":
-        w = uasyncio.gather(flame_cycle(tg1), flame_cycle(tg2))
+        w = uasyncio.gather(flame_cycle(tg1), flame_cycle(tg2), flame_cycle(tg3), flame_cycle(tg4))
         loop2.run_until_complete(w)
 
 

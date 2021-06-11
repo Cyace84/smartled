@@ -153,4 +153,6 @@ server.add_route("/", index)
 
 """ start server """
 
-server.start()
+
+
+thread.start_new_thread(server.start())

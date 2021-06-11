@@ -92,25 +92,21 @@ def set_color(j):
 
     return bytearray(eval(l))
 
-async def q(j, n1, n2):
-    for i in range(n1, n2):
-            rc_index = (i * 256 // 328) + j
-            roof1[i] = wheel(rc_index & 255)
-            await uasyncio.sleep_ms(10)
-
 async def rainbow_cycle(n1, n2, slow=0):
     j = 0
     li = []
     print("start")
     while modes["rainbow"] == "on":
         j += 1
-        loop = uasyncio.get_event_loop()
-        w = uasyncio.gather(q(j,0,50), q(j,50,100), q(j,100,150), q(j,150,200),  q(j,250,300))
-        loop.run_until_complete(w)
-        #li.append(time.time())
-        await uasyncio.sleep_ms(10)
+        for i in range(n1, n2):
+            rc_index = (i * 256 // 328) + j
+            roof1[i] = wheel(rc_index & 255)
 
-        roof1.write()
+
+        #li.append(time.time())
+        await uasyncio.sleep_ms(1)
+        neopixel_write(roof1.pin, roof1.buf[n1:n2], 1)
+        #roof1.write()
         #if len(li) > 50:
         #    print(li[0], li[-1:])
         #    break
@@ -120,8 +116,13 @@ async def rainbow_cycle(n1, n2, slow=0):
 
 loop = uasyncio.get_event_loop()
 w = uasyncio.gather(
-    rainbow_cycle(0,50)
-    )
+    rainbow_cycle(0,50),
+    rainbow_cycle(50,100),
+    rainbow_cycle(100,150),
+    rainbow_cycle(150,200),
+    rainbow_cycle(250,330),
+
+)
 
 loop.run_until_complete(w)
 #uasyncio.run(main())

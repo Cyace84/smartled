@@ -112,12 +112,16 @@ async def rainbow_cycle(n1, n2, slow=0):
     print("start")
     while modes["rainbow"] == "on":
         j += 1
+        roof1.fill((110,0,0))
+        roof1.write()
         for i in range(n1, n2):
             rc_index = (i * 256 // 328) + j
-            roof1[i] = wheel(rc_index & 255)
+            #roof1[i] = wheel(rc_index & 255)
+
 
         #li.append(time.time())
         await uasyncio.sleep_ms(10)
+        roof1.fill((0,0,0))
         roof1.write()
         #if len(li) > 50:
         #    print(li[0], li[-1:])

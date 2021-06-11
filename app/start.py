@@ -162,5 +162,5 @@ server.add_route("/", index)
 def ww():
     server.start()
 _thread.start_new_thread(ww, ())
-print(1)
+
 _thread.start_new_thread(dynamic.create_task, ())

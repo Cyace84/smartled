@@ -117,12 +117,12 @@ async def rainbow_cycle(strips, color, brightness, speed):
         for strip in strips:
             leds = [i for i in range(strip.n)]
             if strip in [tg1, tg2, tg3, tg4]:
-                leds = [q for q in range(i.n)]
+                leds = [q for q in range(strip.n)]
                 leds.reverse()
 
             for i in leds:
                 rc_index = (i * 256 // 328) + j
-                strip[i] = brightness(wheel(rc_index & 255), brightness)
+                strip[i] = brightness_control(wheel(rc_index & 255), brightness)
 
         await uasyncio.sleep_ms(_delay[speed])
         for i in strips:
@@ -229,8 +229,9 @@ def create_task(mode_name, strips, color, brightness, speed):
     if mode_name == "fireflicker":
         w = uasyncio.gather(fireflicker_cycle(_strips, color=color, brightness=brightness, speed=speed))
         loop2.run_until_complete(w)
-
+    print(mode_name)
     if mode_name == "rainbow":
+        print(1)
         w = uasyncio.gather(rainbow_cycle(_strips, color=color, brightness=brightness, speed=speed))
         loop2.run_until_complete(w)
 

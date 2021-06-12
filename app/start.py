@@ -142,12 +142,12 @@ def set_color(data):
                 strips[led].write()
 
 def set_mode(data):
+    print(data)
     mode_name = data["dynamic"]
     strips = data["strips"]
     color = data["colorDynamic"]
     brightness = float(data["brightness"])
     speed = int(data["speed"])
-    f = "{};{};{};{}".format(mode_name, color, brightness, speed)
 
     _thread.start_new_thread(create_task, (mode_name,strips,color,brightness,speed))
 
@@ -162,6 +162,7 @@ def index(request, q):
 
     elif data.get("dynamic"):
         set_mode(data)
+
     server.send("wqeqweq")
 
 

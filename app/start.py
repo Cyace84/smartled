@@ -147,7 +147,8 @@ def set_mode(data):
     color = data["colorDynamic"]
     brightness = float(data["brightness"])
     speed = int(data["speed"])
-    create_task(mode_name, strips, color=color, brightness=brightness, speed=speed)
+    f = "{};{};{};{}".format(mode_name, color, brightness, speed)
+    _thread.start_new_thread(create_task, (mode_name,strips,color,brightness,speed))
 
 
 def index(request, q):

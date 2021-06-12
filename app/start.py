@@ -47,9 +47,14 @@ def parse_data(data):
         v = i.split("=")[1]
         if k == "color":
             new_data["color"] = eval(v)
+            continue
 
         if k == "strips":
             new_data["strips"].append(v)
+            continue
+
+        new_data[k] = v
+
 
     return new_data
 
@@ -136,6 +141,14 @@ def set_color(data):
                 strips[led].fill(color)
                 strips[led].write()
 
+def set_mode(data):
+    mode_name = data["dynamic"]
+    strips = data["strips"]
+    color = data["colorDynamic"]
+    brightness = float(data["brightness"])
+    speed = int(data["speed"])
+    create_task(mode_name, strips, color=color, brightness=brightness, speed=speed)
+
 
 def index(request, q):
     """ request handler """
@@ -145,8 +158,10 @@ def index(request, q):
     if data.get("color"):
         set_color(data)
 
+    elif data.get("dynamic"):
+        set_mode(data)
     server.send("wqeqweq")
-    print(111)
+
 
 
 
@@ -156,7 +171,6 @@ server.add_route("/", index)
 
 """ start server """
 
-_thread.start_new_thread(create_task, ())
 
 server.start()
 

@@ -40,6 +40,15 @@ tg2 = NeoPixel(machine.Pin(21), 149)
 tg3 = NeoPixel(machine.Pin(22), 149)
 tg4 = NeoPixel(machine.Pin(23), 149)
 
+strip_dict = {
+    "roof1": roof1,
+    "roof2": roof2,
+    "tg1": tg1,
+    "tg2": tg2,
+    "tg3": tg3,
+    "tg4": tg4
+}
+
 modes = {
     "rainbow": "off",
     "flame": "on"
@@ -116,24 +125,9 @@ async def rainbow_cycle(n1, n2, slow=0):
     return
 
 
-#loop = uasyncio.get_event_loop()
-#w = uasyncio.gather(
-#    rainbow_cycle(0,150),
-#    rainbow_cycle(150,330),
-
-
-#)
-
-#loop.run_until_complete(w)
-
-#uasyncio.run(main())
-#uasyncio.run(rainbow_cycle(1,2))
-#uasyncio.run(rainbow_cycle(1,2))
-#create_task()
-
-async def flame_cycle(led, color="orange", brightness=0.1, speed=3):
+async def fireflicker_cycle(strips, speed, color, brightness):
     #  Regular (orange) flame:
-
+    print(1)
     if color == "orange":
         r = 226
         g = 121
@@ -142,44 +136,84 @@ async def flame_cycle(led, color="orange", brightness=0.1, speed=3):
         r = 158
         g = 8
         b = 148
+    elif color == "green":
+        r = 74
+        g = 150
+        b = 12
 
     _delay = {
         0: 0,
         1: random.randint(50,100),
-        2: random.randint(100,300),
-        3: random.randint(250,500),
-        4: random.randint(500,1000),
-        5: random.randint(1000,2000)
+        2: random.randint(100,250),
+        3: random.randint(250,350)
         }
+    s=[]
+    _strips = [strip_dict[i] for i in strips]
     while modes["flame"] == "on":
+        for i in _strips:
+            for r in range(i.n):
+                flicker = random.randint(0,55)
+                r1 = r - flicker
+                g1 = g - flicker
+                b1 = b - flicker
+
+                r1 = r1 if r1 > 0 else 0
+                g1 = g1 if g1 > 0 else 0
+                b1 = b1 if b1 > 0 else 0
+                i[r] = brightness_control((r1, g1, b1), brightness)
+            i.write()
+
+        await uasyncio.sleep_ms(_delay[speed])
+        for i in _strips:
+            i.write()
+
+        s.append(time.time())
+
+        if len(s) > 50:
+            print(s[0], s[-1:])
+            return
+
+def bonfire_cycle(strip):
+    if color == "orange":
+        r = 226
+        g = 121
+        b = 0
+    elif color == "purple":
+        r = 158
+        g = 8
+        b = 148
+    elif color == "green":
+        r = 74
+        g = 150
+        b = 12
+
+    while modes["bonfire"] == "on":
+        for i in range(150):
+            strip[i] = brightness_control((r1, g1, b1), brightness)
+            strip.write()
 
 
-        if led in [tg1, tg2, tg3, tg4]:
-            leds = [i for i in range(149)]
-            leds.reverse()
-
-        for i in leds:
-            flicker = random.randint(0,55)
-            r1 = r - flicker
-            g1 = g - flicker
-            b1 = b - flicker
-
-            r1 = r1 if r1 > 0 else 0
-            g1 = g1 if g1 > 0 else 0
-            b1 = b1 if b1 > 0 else 0
-            led[i] = brightness_control((r1, g1, b1), brightness)
-
-        led.write()
-        await uasyncio.sleep_ms(random.randint(250,500))
 
 loop2 = uasyncio.get_event_loop()
 
 
+def create_task(mode_name, strips, brightness, color: str, speed: int):
+    _strips = []
+    if modes[mode_name] == "on":
+        modes[mode_name] = "off"
+        return
+    modes[mode_name] = "on"
+    for strip in strips:
+        if strip == "roofAll":
+            _strips.append(roof1, roof2)
+        elif strip == "cornerAll":
+            _strips.append(tg1, tg2, tg3, tg3)
+        else:
+            _strips.append(strip)
 
-def create_task(mode_name="flame"):
+    if mode_name == "fireflicker":
 
-    if mode_name == "flame":
-        w = uasyncio.gather(flame_cycle(tg1), flame_cycle(tg2), flame_cycle(tg3), flame_cycle(tg4))
+        w = uasyncio.gather(fireflicker_cycle(_strips, color=color, brightness=brightness, speed=speed))
         loop2.run_until_complete(w)
 
 

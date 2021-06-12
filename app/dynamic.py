@@ -164,9 +164,11 @@ async def fireflicker_cycle(strips, speed, color, brightness):
                 leds = [q for q in range(i.n)]
                 leds.reverse()
             ss = []
-            for r in leds:
+            for l in leds:
                 flicker = random.randint(0,55)
                 r1 = r - flicker
+                if color == "purple":
+                    r1 = l - flicker
                 g1 = g - flicker
                 b1 = b - flicker
 
@@ -175,7 +177,6 @@ async def fireflicker_cycle(strips, speed, color, brightness):
                 b1 = b1 if b1 > 0 else 0
 
                 i[r] = brightness_control((r1, g1, b1), brightness)
-                ss.append((r1, g1, b1))
             i.write()
 
 

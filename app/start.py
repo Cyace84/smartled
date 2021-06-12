@@ -148,6 +148,7 @@ def set_mode(data):
     brightness = float(data["brightness"])
     speed = int(data["speed"])
     f = "{};{};{};{}".format(mode_name, color, brightness, speed)
+    print(mode_name, strips, color, brightness, speed)
     _thread.start_new_thread(create_task, (mode_name,strips,color,brightness,speed))
 
 

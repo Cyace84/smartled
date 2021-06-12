@@ -134,8 +134,8 @@ async def fireflicker_cycle(strips, speed, color, brightness):
 
     if color == "orange":
         r = 226
-        g = 70
-        b = 35
+        g = 50
+        b = 25
     elif color == "purple":
         r = 158
         g = 8

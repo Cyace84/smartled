@@ -176,7 +176,7 @@ async def fireflicker_cycle(strips, speed, color, brightness):
                 g1 = g1 if g1 > 0 else 0
                 b1 = b1 if b1 > 0 else 0
 
-                i[r] = brightness_control((r1, g1, b1), brightness)
+                i[l] = brightness_control((r1, g1, b1), brightness)
             i.write()
 
 

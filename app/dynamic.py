@@ -136,8 +136,8 @@ async def fireflicker_cycle(strips, speed, color, brightness):
     #  Regular (orange) flame:
 
     if color == "orange":
-        r = 255
-        g = 60
+        r = 226
+        g = 121
         b = 35
     elif color == "purple":
         r = 158
@@ -166,18 +166,21 @@ async def fireflicker_cycle(strips, speed, color, brightness):
             if i in [tg1, tg2, tg3, tg4]:
                 leds = [q for q in range(i.n)]
                 leds.reverse()
-
+            ss = []
             for r in leds:
                 flicker = random.randint(0,55)
                 r1 = r - flicker
-                g1 = g - flicker
+                g1 = g - flicker*2
                 b1 = b - flicker
 
                 r1 = r1 if r1 > 0 else 0
                 g1 = g1 if g1 > 0 else 0
                 b1 = b1 if b1 > 0 else 0
                 i[r] = brightness_control((r1, g1, b1), brightness)
+                ss.append((r1, g1, b1))
             i.write()
+            print(ss)
+            break
 
         await uasyncio.sleep_ms(_delay[speed])
         for i in strips:

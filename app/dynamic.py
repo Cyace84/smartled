@@ -43,10 +43,10 @@ tg4 = NeoPixel(machine.Pin(23), 149)
 strip_dict = {
     "roof1": roof1,
     "roof2": roof2,
-    "tg1": tg1,
-    "tg2": tg2,
-    "tg3": tg3,
-    "tg4": tg4
+    "ledCorner1": tg1,
+    "ledCorner2": tg2,
+    "ledCorner3": tg3,
+    "ledCorner4": tg4
 }
 
 modes = {

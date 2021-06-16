@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Dream Led</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/0.6.0/modern-normalize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto:wght@400;500;700;900&display=swap"
+    />
+  </head>
+  <body>
+    <div class="stars"></div>
+    <div class="twinkling"></div>
+    <div class="clouds"></div>
+    <main>
+      <section class="led-strips container section">
+        <ul class="strip-list markers">
+          <li id="cornersCustom" class="item is-hidden">
+            <ul class="led-corner-list markers">
+              <li class="icon zoom-out is-hidden">
+                <svg width="30px" height="30px">
+                  <use href="icons.svg#zoom-2"></use>
+                </svg>
+              </li>
+              <li id="ledCorner1" class="item" led-tile>
+                <div class="icon icon-led-off">
+                  <svg width="50px" height="50px">
+                    <use href="icons.svg#icon-ledoff"></use>
+                  </svg>
+                </div>
+                <div class="icon icon-led-on is-hidden">
+                  <svg width="50px" height="50px">
+                    <use href="icons.svg#icon-ledon"></use>
+                  </svg>
+                </div>
+              </li>
+              <li id="ledCorner2" class="item" led-tile>
+                <div class="icon icon-led-off">
+                  <svg width="50px" height="50px">
+                    <use href="icons.svg#icon-ledoff"></use>
+                  </svg>
+                </div>
+                <div class="icon icon-led-on is-hidden">
+                  <svg width="50px" height="50px">
+                    <use href="icons.svg#icon-ledon"></use>
+                  </svg>
+                </div>
+              </li>
+              <li id="ledCorner4" class="item" led-tile>
+                <div class="icon icon-led-off">
+                  <svg width="50px" height="50px">
+                    <use href="icons.svg#icon-ledoff"></use>
+                  </svg>
+                </div>
+                <div class="icon icon-led-on is-hidden">
+                  <svg width="50px" height="50px">
+                    <use href="icons.svg#icon-ledon"></use>
+                  </svg>
+                </div>
+              </li>
+              <li id="ledCorner3" class="item" led-tile>
+                <div class="icon icon-led-off">
+                  <svg width="50px" height="50px">
+                    <use href="icons.svg#icon-ledoff"></use>
+                  </svg>
+                </div>
+                <div class="icon icon-led-on is-hidden">
+                  <svg width="50px" height="50px">
+                    <use href="icons.svg#icon-ledon"></use>
+                  </svg>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li id="cornersAll" class="item" led-tile>
+            <div class="icon icon-led-off">
+              <svg width="100px" height="100px">
+                <use href="icons.svg#icon-ledoff"></use>
+              </svg>
+            </div>
+            <div class="icon icon-led-on is-hidden">
+              <svg width="100px" height="100px">
+                <use href="icons.svg#icon-ledon"></use>
+              </svg>
+            </div>
+            <div class="icon zoom-in is-hidden">
+              <svg width="30px" height="30px">
+                <use href="icons.svg#zoom-1"></use>
+              </svg>
+            </div>
+          </li>
+          <li id="roofAll" class="item" led-tile>
+            <div class="icon icon-led-off">
+              <svg width="100px" height="100px">
+                <use href="icons.svg#icon-ledoff"></use>
+              </svg>
+            </div>
+            <div class="icon icon-led-on is-hidden">
+              <svg width="100px" height="100px">
+                <use href="icons.svg#icon-ledon"></use>
+              </svg>
+            </div>
+            <div class="icon zoom-in is-hidden">
+              <svg width="30px" height="30px">
+                <use href="icons.svg#zoom-1"></use>
+              </svg>
+            </div>
+          </li>
+          <li id="roofCustom" class="item is-hidden">
+            <ul class="led-roof-list markers">
+              <li class="icon zoom-out is-hidden">
+                <svg width="30px" height="30px">
+                  <use href="icons.svg#zoom-2"></use>
+                </svg>
+              </li>
+              <li id="ledRoof1" class="item" led-tile>
+                <div class="icon icon-led-off">
+                  <svg width="50px" height="50px">
+                    <use href="icons.svg#icon-ledoff"></use>
+                  </svg>
+                </div>
+                <div class="icon icon-led-on is-hidden">
+                  <svg width="50px" height="50px">
+                    <use href="icons.svg#icon-ledon"></use>
+                  </svg>
+                </div>
+              </li>
+              <li id="ledRoof2" class="item" led-tile>
+                <div class="icon icon-led-off">
+                  <svg width="50px" height="50px">
+                    <use href="icons.svg#icon-ledoff"></use>
+                  </svg>
+                </div>
+                <div class="icon icon-led-on is-hidden">
+                  <svg width="50px" height="50px">
+                    <use href="icons.svg#icon-ledon"></use>
+                  </svg>
+                </div>
+              </li>
+              <li id="ledRoof3" class="item" led-tile>
+                <div class="icon icon-led-off">
+                  <svg width="50px" height="50px">
+                    <use href="icons.svg#icon-ledoff"></use>
+                  </svg>
+                </div>
+                <div class="icon icon-led-on is-hidden">
+                  <svg width="50px" height="50px">
+                    <use href="icons.svg#icon-ledon"></use>
+                  </svg>
+                </div>
+              </li>
+              <li id="ledRoof4" class="item" led-tile>
+                <div class="icon icon-led-off">
+                  <svg width="50px" height="50px">
+                    <use href="icons.svg#icon-ledoff"></use>
+                  </svg>
+                </div>
+                <div class="icon icon-led-on is-hidden">
+                  <svg width="50px" height="50px">
+                    <use href="icons.svg#icon-ledon"></use>
+                  </svg>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+      <section class="sets section">
+        <div class="settings container">
+          <ul class="setting-list markers">
+            <li class="item colorpicker">
+              <div class="half">
+                <div class="colorPicker"></div>
+              </div>
+              <div class="half readout">
+                <span class="title">Selected Color:</span>
+                <div id="values"></div>
+                <input id="hexInput" />
+              </div>
+            </li>
+            <li class="item dynamic is-hidden">
+              <ul class="modes markers">
+                <li id="fireflicker" class="item" fireflicker-tile>
+                  <span class="txt">Fire Flicker</span>
+                  <svg class="mode-icon icon" width="40px" height="40px">
+                    <use href="icons.svg#fireflicker"></use>
+                  </svg>
+                </li>
+                <li id="rainbow" class="item" rainbow-tile>
+                  <span class="txt">Rainbow</span>
+                  <svg class="mode-icon icon" width="40px" height="40px">
+                    <use href="icons.svg#rainbow"></use>
+                  </svg>
+                </li>
+              </ul>
+              <!-- Fireflicker form -->
+              <form class="dynamic-form fireflicker-form is-hidden">
+                <ul role="group" class="color-list markers">
+                  <li class="item">
+                    <label class="form-field">
+                      <input id="orange" class="checkbox visually-hidden" name="color" type="radio" checked />
+                      <span class="label">Orange</span>
+                      <span class="checkbox-icon"></span>
+                    </label>
+                  </li>
+                  <li class="item">
+                    <label class="form-field">
+                      <input id="purple" class="checkbox visually-hidden" name="color" type="radio" />
+                      <span class="label">Purple</span>
+                      <span class="checkbox-icon"></span>
+                    </label>
+                  </li>
+                  <li class="item">
+                    <label class="form-field">
+                      <span class="label">Green</span>
+                      <input id="green" class="checkbox visually-hidden" name="color" type="radio" />
+                      <span class="checkbox-icon"></span>
+                    </label>
+                  </li>
+                </ul>
+
+                <label class="form-field">
+                  <span class="label">Brightness</span>
+                  <input class="input" type="text" name="brightness" placeholder="0.01-1" autocomplete="off" />
+                </label>
+
+                <label class="form-field speed">
+                  <span class="label">Speed</span>
+                  <input class="input" type="text" name="speed" placeholder="0.01-1" autocomplete="off" />
+                </label>
+                <button type="button" class="submit-btn">Go!</button>
+              </form>
+              <!-- Rainbow form -->
+              <form class="dynamic-form rainbow-form is-hidden">
+                <!-- <span class="input-title">Color</span> -->
+                <ul role="group" class="color-list markers visually-hidden">
+                  <li class="item visually-hidden">
+                    <label class="form-field">
+                      <input id="orange" class="checkbox visually-hidden" name="color" type="radio" checked />
+                      <span class="label">Orange</span>
+                      <span class="checkbox-icon"></span>
+                    </label>
+                  </li>
+                  <li class="item">
+                    <label class="form-field">
+                      <input id="purple" class="checkbox visually-hidden" name="color" type="radio" />
+                      <span class="label">Purple</span>
+                      <span class="checkbox-icon"></span>
+                    </label>
+                  </li>
+                  <li class="item">
+                    <label class="form-field">
+                      <span class="label">Green</span>
+                      <input id="green" class="checkbox visually-hidden" name="color" type="radio" />
+                      <span class="checkbox-icon"></span>
+                    </label>
+                  </li>
+                </ul>
+
+                <label class="form-field">
+                  <span class="label">Brightness</span>
+                  <input class="input" type="text" name="brightness" placeholder="0.01-1" autocomplete="off" />
+                </label>
+
+                <label class="form-field speed">
+                  <span class="label">Speed</span>
+                  <input class="input" type="text" name="speed" placeholder="0.01-1" autocomplete="off" />
+                </label>
+                <button type="button" class="submit-btn">Go!</button>
+              </form>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <!-- Mode section -->
+      <section class="section">
+        <div class="container">
+          <ul class="settings-nav markers">
+            <li id="modeColor" class="item" mode-nav active-mode>
+              <div class="icon">
+                <svg width="60px" height="50px">
+                  <use href="icons.svg#icon-eyedropper"></use>
+                </svg>
+              </div>
+              <span>Color</span>
+            </li>
+            <li id="modeDynamic" class="item" mode-nav>
+              <div class="icon">
+                <svg width="60px" height="50px">
+                  <use href="icons.svg#icon-equalizer2"></use>
+                </svg>
+              </div>
+
+              <span>Dynamic</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="scripts.js"></script>
+  </body>
+</html>
